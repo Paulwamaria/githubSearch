@@ -1,6 +1,26 @@
 # GithubSearch
 
+A GithubSearch is a web aplication that allows a user to enter a github username in the search box and returns the subjects names and desccriptions of the public repositories. The application uses a github API.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
+
+## Developer
+
+The application was developed by Paul Kamau Wanmaria as an independent project at Moringa School.
+
+##Technology 
+
+*HTML
+*CSS
+*Angular CLI
+*Java script
+
+
+##Live link
+
+
+##Copyright
+
+
 
 ## Development server
 
