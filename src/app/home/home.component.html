@@ -5,5 +5,5 @@
     Git search enables you to search any user on github. Enter the name person or the repository you wich to find and click search.
   </P>
 </div>
-  <app-search-form></app-search-form>
+  <app-search-form (emitSearch)='searchUserName($event)'></app-search-form>
 </div>
