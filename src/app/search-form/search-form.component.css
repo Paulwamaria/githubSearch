@@ -6,3 +6,6 @@
   margin-left:px;
   margin-top:10px;
 } */
+form{ 
+  padding-left:calc(33vw - 0px);
+}
