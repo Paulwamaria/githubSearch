@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SearchFormComponent,
     AboutComponent,
     NotFoundComponent,
+    ContactsComponent,
 
 
   ],
