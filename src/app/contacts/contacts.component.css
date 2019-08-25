@@ -1,9 +1,13 @@
 .contacts{
   height:100vh;
-  padding-top:calc(50vh - 60px);
+  padding-top:calc(40vh - 20px);
+ 
 }
 .contacts a{
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 30px;
   color:white;
+}
+.container-fluid{
+  background-color: rgba(0, 0, 0, 0.5);
 }

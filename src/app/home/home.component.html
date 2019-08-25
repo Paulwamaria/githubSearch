@@ -2,8 +2,18 @@
 <div class="intro text-white text-center">
   <h2 class="mt-20">Welcome to Git Search</h2>
   <P class="">
-    Git search enables you to search any user on github. Enter the name person or the repository you wich to find and click search.
+    Git search enables you to search any user on github. Enter the name person or the repository you wish to find and click search.
   </P>
 </div>
   <app-search-form (emitSearch)='searchRepos($event)'></app-search-form>
+  <div class="card-columns">
+    <div *ngIf='repos'>
+      <div *ngFor='let repo of repos'>
+        <div class="card">
+          {{repo.name}}
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
