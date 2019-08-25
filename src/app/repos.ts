@@ -1,3 +1,3 @@
 export class Repos {
-  constructor(public url: string) {}
+  constructor(public name: string) {}
 }
