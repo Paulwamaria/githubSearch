@@ -28,7 +28,9 @@ export class GitHttpServiceService {
           this.repos = [];
           for (let i = 0; i < result.length; i++) {
             let url = result[i].name;
-            let repo = new Repos(url);
+            let avatar = result[i].owner.avatar_url;
+            let description = result[i].description;
+            let repo = new Repos(url, avatar, description);
             this.repos.push(repo);
           }
           console.log(this.repos);
