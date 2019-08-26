@@ -4,6 +4,7 @@ import {HttpClient } from '@angular/common/http';
 import { GitHttpServiceService } from '../services/git-http-service.service';
 import { promise } from 'protractor';
 import { Repos } from '../repos';
+import { ProfPic } from '../prof-pic';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Repos } from '../repos';
 })
 export class HomeComponent implements OnInit {
   repos: Repos[];
+  profpic: ProfPic;
   constructor(public gitHttpServiceService: GitHttpServiceService) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
       //do something
       // console.log(result);
       this.repos = this.gitHttpServiceService.repos;
+      this.profpic = this.gitHttpServiceService.profpic;
     }, (error) => {
       console.log(error);
     });

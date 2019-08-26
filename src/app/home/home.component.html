@@ -48,18 +48,18 @@
   <app-search-form (emitSearch)='searchRepos($event)'></app-search-form>
   <div class="search-results">
     <div class="card-columns">
-      
+
+        <!-- <img src="{{profpic.prof}}" class="rounded-circle" > -->
       <div *ngIf='repos'>
+        
         <!-- <h2 class="text-white"> Here are the repositories:</h2> -->
-        <img src="{{repos.avatarUrl}}" class="rounded-circle" >
-     
+        <!-- <img src="{{repos.avatar_url}}" class="rounded-circle" > -->
         <div *ngFor='let repo of repos'>
             
-
           <div class="card mb-3 pl-10px bg-dark">
        
-            <h4 class="text-white ">Project name: <span class="text-success">{{repo.name}}</span></h4><br>
-            <h4 class="text-success text-center">Project Description</h4>
+            <h3 class="text-success text-center ">Project name:</h3> <span class="text-white">{{repo.name}}</span><br>
+            <h3 class="text-success text-center">Project Description</h3>
            <p class="pl-10 text-white"> {{repo.description}}</p>
 
           </div>

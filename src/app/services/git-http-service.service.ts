@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Repos } from '../repos';
 // import { promise } from 'protractor';
+import { ProfPic } from '../prof-pic';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GitHttpServiceService {
   repos: Repos[] = [];
+  profpic: ProfPic;
   constructor(private http: HttpClient) {
 
    }
@@ -28,6 +30,7 @@ export class GitHttpServiceService {
           this.repos = [];
           for (let i = 0; i < result.length; i++) {
             let url = result[i].name;
+            // this.profpic = result[i].owner.avatar_url;
             let avatarUrl = result[i].owner.avatar_url;
             let description = result[i].description;
             let repo = new Repos(url, avatarUrl, description);

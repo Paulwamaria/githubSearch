@@ -16,3 +16,7 @@ body{
   padding-left:10px;
   
 }
+#avatar{
+  widows: 10%;
+  height:auto;
+}
