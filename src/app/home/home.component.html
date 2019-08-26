@@ -51,15 +51,16 @@
       
       <div *ngIf='repos'>
         <!-- <h2 class="text-white"> Here are the repositories:</h2> -->
-        
-        <img src="{{repos.avatarUrl}">
+        <img src="{{repos.avatarUrl}}" class="rounded-circle" >
+     
         <div *ngFor='let repo of repos'>
             
 
-          <div class="card mb-3 pl-10px">
+          <div class="card mb-3 pl-10px bg-dark">
        
-            <h3 class="text-center text-success">{{repo.name}}</h3><br>
-           <p class="pl-10"> {{repo.description}}</p>
+            <h4 class="text-white ">Project name: <span class="text-success">{{repo.name}}</span></h4><br>
+            <h4 class="text-success text-center">Project Description</h4>
+           <p class="pl-10 text-white"> {{repo.description}}</p>
 
           </div>
 
