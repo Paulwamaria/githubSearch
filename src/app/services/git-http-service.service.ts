@@ -15,7 +15,7 @@ export class GitHttpServiceService {
 
    }
 
-  async searchRepos(searchTerm: string): Promise<void> {
+  async searchRepos(searchTerm: string): Promise<Repos[]> {
     // https://api.github.com/users/Paulwamaria/repos?api_key=78bf3cd53966187cbfc945e904e336d101a7e1c6
     let gitSearchEndPoint = 'https://api.github.com/users/';
     try {
@@ -26,11 +26,20 @@ export class GitHttpServiceService {
         let url = result[i].name;
         // this.profpic = result[i].owner.avatar_url;
         let avatarUrl = result[i].owner.avatar_url;
-        let description = result[i].description;
-        let repo = new Repos(url, avatarUrl, description);
+        let description = result[i].description || 'No description provided.';
+        let repo = new Repos(
+          url,
+          avatarUrl,
+          description,
+          result[i].html_url,
+          result[i].language || 'Unspecified',
+          result[i].stargazers_count || 0,
+          result[i].forks_count || 0,
+          result[i].updated_at
+        );
         this.repos.push(repo);
       }
-      console.log(this.repos);
+      return this.repos;
     } catch (error) {
       console.log(error);
       throw error;

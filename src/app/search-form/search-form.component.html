@@ -1,17 +1,12 @@
-<div class="container-fluid">
-<div class="form-group text-center">
-  <form class="form-inline" #searchForm='ngForm'>
-    <div class="form-group text-center">
-     
-       <input type="text" name="searchTerm" id="searchTerm" class="form-control "  placeholder="Enter username/repo-name" [(ngModel)]='searchTerm'>
+<form class="search-form" #searchForm="ngForm" (ngSubmit)="search()">
+  <input
+    type="text"
+    name="searchTerm"
+    id="searchTerm"
+    class="form-control"
+    placeholder="GitHub username"
+    [(ngModel)]="searchTerm"
+    autocomplete="off">
 
-  
-      <button type="submit" class="btn btn-success mx-2 " (click)='search()' >Search</button>
-
-    </div>
-   
-  </form>
-
-</div>
-</div>
-
+  <button type="submit" class="btn btn-success">Search</button>
+</form>

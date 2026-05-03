@@ -11,24 +11,39 @@ import { ProfPic } from '../prof-pic';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  repos: Repos[];
+  repos: Repos[] = [];
   profpic: ProfPic;
+  hasSearched = false;
+  isLoading = false;
+  errorMessage = '';
+  currentSearchTerm = '';
+
   constructor(public gitHttpServiceService: GitHttpServiceService) { }
 
   ngOnInit() {
   }
 
-  searchRepos(searchTerm) {
-    // console.log(searchTerm);
-    this.gitHttpServiceService.searchRepos(searchTerm).then((result) => {
-      //do something
-      // console.log(result);
-      this.repos = this.gitHttpServiceService.repos;
-      this.profpic = this.gitHttpServiceService.profpic;
-    }, (error) => {
-      console.log(error);
+  searchRepos(searchTerm: string) {
+    const normalizedTerm = (searchTerm || '').trim();
+
+    if (!normalizedTerm) {
+      this.errorMessage = 'Enter a GitHub username to search.';
+      return;
+    }
+
+    this.hasSearched = true;
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.currentSearchTerm = normalizedTerm;
+
+    this.gitHttpServiceService.searchRepos(normalizedTerm).then((repos) => {
+      this.repos = repos;
+    }, () => {
+      this.repos = [];
+      this.errorMessage = 'No GitHub user found for that search. Check the username and try again.';
+    }).finally(() => {
+      this.isLoading = false;
     });
-    // return promise;
   }
 
 }

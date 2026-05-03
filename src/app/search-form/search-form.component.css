@@ -1,11 +1,27 @@
-/* .container-fluid{
-  background-color:rgba(0,0,0,0.5);
-  height:100vh;
-} */
-/* .btn{
-  margin-left:px;
-  margin-top:10px;
-} */
-form{ 
-  padding-left:calc(33vw - 0px);
+.search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  max-width: 620px;
+}
+
+.form-control,
+.btn {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+.btn {
+  min-width: 118px;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }
