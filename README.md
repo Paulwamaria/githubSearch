@@ -1,47 +1,65 @@
-# GithubSearch
+# GitHub Search
 
-GithubSearch is a web application that allows a user to enter a github username in the search box and returns the subjects names and description of the public repositories. The application uses a github API
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
+GitHub Search is an Angular app for looking up a GitHub user and scanning their public repositories. Search results show repository names, descriptions, primary languages, stars, forks, last updated dates, and links back to GitHub.
 
-## Developer
+![GitHub Search homepage showing an active octocat search with repository cards](docs/home-active-search.png)
 
-The application was developed by Paul Kamau Wanmaria as an independent project at Moringa School.
+## Features
 
-##Technology 
+- Search public GitHub repositories by username.
+- View repository cards with key metadata.
+- Open matching repositories directly on GitHub.
+- Responsive Home, About, and Contact pages.
+- In-memory caching for repeat searches.
 
-*HTML
-*CSS
-*Angular CLI
-*Java script
+## Tech Stack
 
+- Angular 21
+- TypeScript 5.9
+- RxJS 7
+- Vitest
+- GitHub public API
 
-##Live link
+## Getting Started
 
+Install dependencies:
 
-##Copyright
+```bash
+npm install
+```
 
+Start the development server:
 
+```bash
+npm start
+```
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Open `http://localhost:4200/` in your browser.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Create a production build:
 
-## Running unit tests
+```bash
+npm run build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The build output is written to `dist/githubSearch`.
 
-## Running end-to-end tests
+## Tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run the unit test suite:
 
-## Further help
+```bash
+npm test -- --watch=false
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Project Notes
+
+The app currently searches public repositories for GitHub users. Private repositories and organization-wide search are outside the current scope.
+
+## Author
+
+Developed by Paul Wamaria.
+
+>> A simple Moringa School coursework project
