@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { GitHttpServiceService } from '../services/git-http-service.service';
 import { Repos } from '../repos';
 import { ProfPic } from '../prof-pic';
@@ -17,17 +17,22 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   errorMessage = '';
   currentSearchTerm = '';
+  private activeSearchTerm = '';
 
-  constructor(public gitHttpServiceService: GitHttpServiceService) { }
+  constructor(
+    public gitHttpServiceService: GitHttpServiceService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
   }
 
-  searchRepos(searchTerm: string) {
+  async searchRepos(searchTerm: string) {
     const normalizedTerm = (searchTerm || '').trim();
 
     if (!normalizedTerm) {
       this.errorMessage = 'Enter a GitHub username to search.';
+      this.changeDetectorRef.detectChanges();
       return;
     }
 
@@ -35,15 +40,29 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     this.currentSearchTerm = normalizedTerm;
+    this.activeSearchTerm = normalizedTerm;
 
-    this.gitHttpServiceService.searchRepos(normalizedTerm).then((repos) => {
+    try {
+      const repos = await this.gitHttpServiceService.searchRepos(normalizedTerm);
+
+      if (this.activeSearchTerm !== normalizedTerm) {
+        return;
+      }
+
       this.repos = repos;
-    }, () => {
+    } catch {
+      if (this.activeSearchTerm !== normalizedTerm) {
+        return;
+      }
+
       this.repos = [];
       this.errorMessage = 'No GitHub user found for that search. Check the username and try again.';
-    }).finally(() => {
-      this.isLoading = false;
-    });
+    } finally {
+      if (this.activeSearchTerm === normalizedTerm) {
+        this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
+      }
+    }
   }
 
 }

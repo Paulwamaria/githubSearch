@@ -1,11 +1,10 @@
-<form class="search-form" #searchForm="ngForm" (ngSubmit)="search()">
+<form class="search-form" (ngSubmit)="search(searchInput.value)">
   <input
+    #searchInput
     type="text"
-    name="searchTerm"
     id="searchTerm"
     class="form-control"
     placeholder="GitHub username"
-    [(ngModel)]="searchTerm"
     autocomplete="off">
 
   <button type="submit" class="btn btn-success">Search</button>

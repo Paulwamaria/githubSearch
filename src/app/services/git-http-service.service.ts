@@ -1,48 +1,60 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Repos } from '../repos';
-import { ProfPic } from '../prof-pic';
+
+interface GithubRepoResponse {
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  updated_at: string;
+  owner: {
+    avatar_url: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class GitHttpServiceService {
-  repos: Repos[] = [];
-  profpic: ProfPic;
-  constructor(private http: HttpClient) {
+  private readonly reposEndpoint = 'https://api.github.com/users';
+  private readonly repoCache = new Map<string, Repos[]>();
 
-   }
+  constructor(private http: HttpClient) { }
 
   async searchRepos(searchTerm: string): Promise<Repos[]> {
-    // https://api.github.com/users/Paulwamaria/repos?api_key=78bf3cd53966187cbfc945e904e336d101a7e1c6
-    let gitSearchEndPoint = 'https://api.github.com/users/';
-    try {
-      const result = await firstValueFrom(this.http.get<any[]>(gitSearchEndPoint + searchTerm + '/repos?api_key=' + environment.GITHUBAPIKEY));
+    const normalizedTerm = searchTerm.trim().toLowerCase();
+    const cachedRepos = this.repoCache.get(normalizedTerm);
 
-      this.repos = [];
-      for (let i = 0; i < result.length; i++) {
-        let url = result[i].name;
-        // this.profpic = result[i].owner.avatar_url;
-        let avatarUrl = result[i].owner.avatar_url;
-        let description = result[i].description || 'No description provided.';
-        let repo = new Repos(
-          url,
-          avatarUrl,
-          description,
-          result[i].html_url,
-          result[i].language || 'Unspecified',
-          result[i].stargazers_count || 0,
-          result[i].forks_count || 0,
-          result[i].updated_at
-        );
-        this.repos.push(repo);
-      }
-      return this.repos;
-    } catch (error) {
-      console.log(error);
-      throw error;
+    if (cachedRepos) {
+      return cachedRepos;
     }
+
+    const repos = await firstValueFrom(
+      this.http.get<GithubRepoResponse[]>(`${this.reposEndpoint}/${normalizedTerm}/repos`, {
+        params: {
+          per_page: 30,
+          sort: 'updated',
+          direction: 'desc'
+        }
+      })
+    );
+
+    const mappedRepos = repos.map((repo) => new Repos(
+      repo.name,
+      repo.owner.avatar_url,
+      repo.description || 'No description provided.',
+      repo.html_url,
+      repo.language || 'Unspecified',
+      repo.stargazers_count || 0,
+      repo.forks_count || 0,
+      repo.updated_at
+    ));
+
+    this.repoCache.set(normalizedTerm, mappedRepos);
+    return mappedRepos;
   }
 }
