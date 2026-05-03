@@ -1,14 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import {HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { GitHttpServiceService } from '../services/git-http-service.service';
-import { promise } from 'protractor';
 import { Repos } from '../repos';
 import { ProfPic } from '../prof-pic';
 
 
 @Component({
   selector: 'app-home',
+  standalone: false,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

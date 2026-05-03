@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-form',
+  standalone: false,
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css']
 })
