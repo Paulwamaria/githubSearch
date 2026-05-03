@@ -1,12 +1,45 @@
-<div class="container-fluid text-center text-white">
+<section class="contact-page">
+  <div class="contact-shell">
+    <div class="contact-intro">
+      <p class="eyebrow">Contact</p>
+      <h1>Reach out about Git Search.</h1>
+      <p class="summary">
+        Send feedback, report an issue, or ask about the project using one of the channels below.
+      </p>
+    </div>
 
-<div class="contacts">
-  <h1 class=""><b>You can reach out to us</b></h1>
-  <a href="mail:helloemryon@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i>{{tittle}}</a><br>
-  <a href="#"><i class="fa fa-twitter" aria-hidden="true">@Paulenigmatico</i></a><br>
-  <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>0780404626</a>
-</div>
-  
-</div>
+    <div class="contact-grid">
+      <a class="contact-card" [href]="'mailto:' + email">
+        <span class="contact-icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+        <span>
+          <strong>Email</strong>
+          <small>{{ email }}</small>
+        </span>
+      </a>
 
+      <a class="contact-card" href="https://twitter.com/Paulenigmatico" target="_blank" rel="noopener">
+        <span class="contact-icon"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+        <span>
+          <strong>Twitter</strong>
+          <small>{{ twitter }}</small>
+        </span>
+      </a>
 
+      <a class="contact-card" [href]="linkedinUrl" target="_blank" rel="noopener">
+        <span class="contact-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+        <span>
+          <strong>LinkedIn</strong>
+          <small>{{ linkedin }}</small>
+        </span>
+      </a>
+
+      <a class="contact-card" [href]="'tel:' + phone">
+        <span class="contact-icon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+        <span>
+          <strong>Phone</strong>
+          <small>{{ phone }}</small>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
